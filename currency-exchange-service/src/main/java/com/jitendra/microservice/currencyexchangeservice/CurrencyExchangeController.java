@@ -21,10 +21,13 @@ public class CurrencyExchangeController {
 	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
 
 		ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
-		/*ExchangeValue findByFromAndTo = repository.findByFromAndTo(from, to);
-		ExchangeValue exchangeValue = new ExchangeValue(100L, from, to,
-				BigDecimal.valueOf(65));
-		exchangeValue.setPort(Integer.parseInt(env.getProperty("local.server.port")));*/
+		/*
+		 * ExchangeValue findByFromAndTo = repository.findByFromAndTo(from, to);
+		 * ExchangeValue exchangeValue = new ExchangeValue(100L, from, to,
+		 * BigDecimal.valueOf(65));
+		 * exchangeValue.setPort(Integer.parseInt(env.getProperty("local.server.port")))
+		 * ;
+		 */
 		return exchangeValue;
 	}
 
