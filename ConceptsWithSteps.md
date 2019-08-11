@@ -45,6 +45,8 @@ Here we will discuss about each of the challenges and how Spring Cloud is going 
 **Configuration Management**
 Spring Cloud Config Server
 
+![alt text](https://user-images.githubusercontent.com/16119293/62832941-49074a00-bc54-11e9-9a8a-0805403f2282.JPG)
+
 Since we have multiple instances running on multiple environments hence there will be multiple configuration to manage.
 Spring Cloud config Server provide an approach where you can configure all the configuration for all the different environment of all the microservices in a Git repository. So we have a centralised configuration and "Spring Cloud Config Server" exposes this configuration to all the microservices.
 
@@ -55,6 +57,37 @@ So centralised configuration makes it easy to maintain the configuration.
 2. Ribbon (Client Side Load Balancing)
 3. Feign (Easier REST Client)
 
+![alt text](https://user-images.githubusercontent.com/16119293/62832957-7653f800-bc54-11e9-8b5d-c7b99023aa3f.JPG)
 
+In the example in the above pic **CurrencyCalculationService** is talking to **CurrencyExchangeService**. Here we have multiple instances of **CurrencyExchangeService** and it is possible at any point of time a new instance can added or any instance will be removed. Now we want that **CurrencyCalculationService** distribute its load across all the instances of **CurrencyExchangeService**.
+So we want to know
+1. No of instances of **CurrencyExchangeService**
+2. Distribute the load across all the instance of **CurrencyExchangeService**
+So for the solution above proble we are going to use
 
+1. Naming Server(Eureka)
+naming Server has two important feature
+A) Service Registration: All the instances of all the microservices would register with the Naming Server
+B) Service Discovery: It tells about current intances of registered microservice (it can tell the current instances of **CurrencyExchangeService**)
+
+2. Ribbon (Client Side Load Balancing)
+We will use Ribbon for Client Side Load Balancing that means **CurrencyCalculationService** will host Ribbon
+
+3. Feign (Easier REST Client)
+provide mechanism to write simple RestFul client
+
+**Visibility and Monitoring**
+
+The solution for visibility and monitoring are
+A) Zipkin Distributed Tracing
+
+We will use **Spring Cloud Sleuth** to assign unique ID to a request across multiple component.Zipkin Distributed Tracing server will trace the request across multiple components.
+
+B) Netflix API Gateway
+
+One of the important feature of microservices is that they provide lots of common features for e.g. loggins,securities,analytics etc.
+We don't want to implement all of these features in every microservices. **API Gateway** provide great solution to these kind of challenges. We will use **Netflix Zuul API Gateway**.
+
+**Fault Tolerance**
+Hystrix: If service is down Hystrix helps to set up default respond.
 
